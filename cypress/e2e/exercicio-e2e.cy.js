@@ -14,19 +14,19 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         E validando minha compra ao final */
 
     beforeEach(() => {
-        cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
+        cy.visit('minha-conta/')
         cy.get('#username').type(perfil.usuario)
         cy.get('#password').type(perfil.senha)
         cy.get('.woocommerce-form > .button').click()
     });
 
     it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
-        cy.visit('http://lojaebac.ebaconline.art.br/produtos/')
+        cy.visit('produtos/')
         let qtd = 4
         produtosPage.buscarProduto('Abominable Hoodie')
         produtosPage.addProdutoCarrinho('XL', 'Green', qtd)
         cy.get('.woocommerce-message').should('contain', qtd + ' × “Abominable Hoodie” foram adicionados no seu carrinho.')
-        cy.visit('http://lojaebac.ebaconline.art.br/carrinho/')
+        cy.visit('carrinho/')
         cy.get('.checkout-button').click()
         cy.get('#terms').click()
         cy.get('#place_order').click()
